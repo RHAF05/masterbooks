@@ -28,7 +28,7 @@ class CreateProductos extends Migration
             $table->unsignedBigInteger('tipo_id');
             $table->foreign('tipo_id')->references('id')->on('tipos');
             $table->unsignedBigInteger('estado_id');
-            $table->foreign('estado_id')->references('id')->on('estados');
+            $table->foreign('estado_id')->references('id')->on('estados_productos');
             $table->timestamps();
         });
     }
