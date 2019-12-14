@@ -36,14 +36,57 @@ class ProductosController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * función para guardar en la base de daos los productos
      */
     public function store(Request $request)
     {
-        //
+        //Validamos
+        $request->validate([
+            'isbn' => 'required|max:100',
+            'nombre' => 'required|max:100',
+            'precio' => 'required|numeric',
+            'imagen' => 'required|mimes:jpeg,jpg,png',
+            'archivo' => 'mimes:pdf|max:10000',
+            'categoria_id' => 'required',
+            'autor_id' => 'required',
+            'tipo_id' => 'required',
+            'estado_id' => 'required',
+        ]);
+
+        //Subir la imagen al servidor
+        $nombreimg = "";
+        if($request->file('imagen')){
+            $imagen = $request->file('imagen');
+            $ruta = public_path().'/imgproductos';
+            $nombreimg = uniqid()."-".$imagen->getClientOriginalName();
+            $imagen->move($ruta,$nombreimg);
+        }
+        //Subir el pdf al servidor
+        $nombrepdf = "";
+        if($request->file('archivo')){
+            $archivo = $request->file('archivo');
+            $ruta = public_path().'/libros';
+            $nombrepdf = uniqid()."-".$archivo->getClientOriginalName();
+            $archivo->move($ruta,$nombrepdf);
+        }
+
+        //Insertamos los registros en la base de datos
+        $producto = new Producto();
+        $producto->isbn = $request->isbn;
+        $producto->nombre = $request->nombre;
+        $producto->descripcion = $request->descripcion;
+        $producto->precio = $request->precio;
+        $producto->imagen = $request->imagen;
+        $producto->archivo = $request->archivo;
+        $producto->categoria_id = $request->categoria_id;
+        $producto->autor_id = $request->autor_id;
+        $producto->tipo_id = $request->tipo_id;
+        $producto->tipo_id = $request->tipo_id;
+        $producto->estado_id = $request->estado_id;
+
+        $producto->save();
+
+        return redirect()->route('productos.index');
     }
 
     /**
