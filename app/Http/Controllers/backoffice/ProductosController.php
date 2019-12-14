@@ -2,29 +2,37 @@
 
 namespace App\Http\Controllers\backoffice;
 
+use App\Autor;
+use App\Categoria;
+use App\Estadoproducto;
 use App\Http\Controllers\Controller;
+use App\Producto;
+use App\Tipo;
 use Illuminate\Http\Request;
 
 class ProductosController extends Controller
 {
+
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+     * Función para mostrar todos los productos creados
      */
     public function index()
     {
-        //
+        $productos = Producto::all();
+        //dd($productos);
+        return view('backoffice.productos.index',compact('productos'));
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
+     * Función para mostrar el formulario para crear un nuevo producto
      */
     public function create()
     {
-        //
+        $categorias=Categoria::all();
+        $autores=Autor::all();
+        $tipos=Tipo::all();
+        $estados=Estadoproducto::all();
+        return view('backoffice.productos.crear', compact('categorias','autores','tipos','estados'));
     }
 
     /**

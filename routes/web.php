@@ -11,6 +11,9 @@
 |
 */
 
+
 Route::get('/', function () {
     return view('backoffice.productos.index');
 });
+
+Route::resource('/productos','backoffice\ProductosController');
