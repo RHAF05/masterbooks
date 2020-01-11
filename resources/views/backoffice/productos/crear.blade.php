@@ -36,11 +36,11 @@
                   </div>
                   <div class="form-group">
                     <label for="archivo">Archivo (pdf)</label>
-                    <input type="file" name="archivo" class="form-control" placeholder="Ingresar archivo" required accept=".pdf">
+                    <input type="file" id="archivo" name="archivo" class="form-control" placeholder="Ingresar archivo" required accept=".pdf">
                   </div>
                   <div class="form-group">
                     <label for="imagen">Imagen (jpg, png)</label>
-                    <input type="file" name="imagen" class="form-control" placeholder="Ingresar imagen" required accept="image/png, .jpeg, .jpg">
+                    <input type="file" id="imagen" name="imagen" class="form-control" placeholder="Ingresar imagen" required accept="image/png, .jpeg, .jpg">
                   </div>
                   <div class="form-group">
                     <label for="categoria_id">Categoria</label>

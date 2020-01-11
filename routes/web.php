@@ -17,3 +17,5 @@ Route::get('/', function () {
 });
 
 Route::resource('/productos','backoffice\ProductosController');
+Route::get('/productos/{id}/inactivar','backoffice\ProductosController@inactivar')->name('productos.inactivar');
+Route::get('/productos/{id}/activar','backoffice\ProductosController@activar')->name('productos.activar');

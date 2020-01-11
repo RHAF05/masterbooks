@@ -30,6 +30,7 @@ class CreateProductos extends Migration
             $table->unsignedBigInteger('estado_id');
             $table->foreign('estado_id')->references('id')->on('estados_productos');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
