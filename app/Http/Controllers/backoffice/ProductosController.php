@@ -18,11 +18,17 @@ class ProductosController extends Controller
     /**
      * Función para mostrar todos los productos creados
      */
-    public function index()
+    public function index(Request $request)
     {
-        $productos = Producto::all();
-        //dd($productos);
-        return view('backoffice.productos.index',compact('productos'));
+        $categorias = Categoria::all();
+        //$productos = Producto::all();
+        // $productos = Producto::where('nombre','LIKE','%'.$request->nombre.'%')->get();
+        $productos = Producto::nombre($request->nombre)
+                                ->categoria($request->categoria_id)
+                                ->precio($request->desde,$request->hasta)
+                                ->get();
+        // dd($productos);
+        return view('backoffice.productos.index',compact('productos','request','categorias'));
     }
 
     /**
