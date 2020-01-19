@@ -85,8 +85,8 @@ class ProductosController extends Controller
         $producto->nombre = $request->nombre;
         $producto->descripcion = $request->descripcion;
         $producto->precio = $request->precio;
-        $producto->imagen = $request->imagen;
-        $producto->archivo = $request->archivo;
+        $producto->imagen = $nombreimg;
+        $producto->archivo = $nombrepdf;
         $producto->categoria_id = $request->categoria_id;
         $producto->autor_id = $request->autor_id;
         $producto->tipo_id = $request->tipo_id;
