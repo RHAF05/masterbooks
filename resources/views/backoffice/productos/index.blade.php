@@ -25,7 +25,7 @@
               <div class="card-body">
               	<div class="text-right">
                     <a class="btn btn-success" href="{{ route('productos.create') }}"><i class="fas fa-plus"></i></a>
-                    <a class="btn btn-danger" href="{{ route('productos.create') }}"><i class="fas fa-file-pdf"></i></a>
+                    <a class="btn btn-danger" href="{{ route('productos.exportarPdf') }}" target="_blank"><i class="fas fa-file-pdf"></i></a>
 
                     {{-- filtros --}}
                     <form action="{{ route('productos.index') }}" method="GET" class="form-inline">

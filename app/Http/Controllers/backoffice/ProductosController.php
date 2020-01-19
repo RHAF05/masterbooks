@@ -10,6 +10,7 @@ use App\Mail\ProductoCreado;
 use App\Producto;
 use App\Tipo;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Mail;
 
 class ProductosController extends Controller
@@ -207,5 +208,19 @@ class ProductosController extends Controller
         $producto->estado_id = 1;
         $producto->save();
         return redirect()->route('productos.index')->with('status','Activado '.$producto->nombre.' con éxito!');
+    }
+
+
+    /*
+    Exportar a DPF
+    */
+    public function exportarPdf(){
+        $productos = Producto::all();
+        $request = array();
+        $pdf = App::make('dompdf.wrapper');
+        // $pdf->loadHTML('<h1>Test</h1>');
+        $pdf->loadView('backoffice.productos.pdf',compact('productos'))->setPaper('a4', 'landscape');
+        dd($pdf);
+        return $pdf->stream();
     }
 }
