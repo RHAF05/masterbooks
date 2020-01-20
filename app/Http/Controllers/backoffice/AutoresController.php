@@ -105,5 +105,8 @@ class AutoresController extends Controller
     public function destroy($id)
     {
         //
+        $autor = Autor::find($id);
+        $autor->delete();
+        return redirect()->route('autores.index')->with('status','Autor '.$autor->nombre.' eliminado con éxito!');
     }
 }
