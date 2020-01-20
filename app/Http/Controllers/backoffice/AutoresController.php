@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\backoffice;
 
+use App\Autor;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -12,9 +13,11 @@ class AutoresController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         //
+        $autores = Autor::where('nombre','LIKE','%'.$request->nombre.'%')->get();
+        return view('backoffice.autores.index',compact('autores','request'));
     }
 
     /**
@@ -25,6 +28,7 @@ class AutoresController extends Controller
     public function create()
     {
         //
+        return view('backoffice.autores.crear');
     }
 
     /**
@@ -36,6 +40,15 @@ class AutoresController extends Controller
     public function store(Request $request)
     {
         //
+        $request->validate([
+            'nombre' => 'required|max:150|unique:App\Autor',
+        ]);
+
+        $autor = new Autor();
+
+        $autor->nombre=$request->nombre;
+        $autor->save();
+        return redirect()->route('autores.index')->with('status','Autor '.$request->nombre.' creado con &eacute;xito!');
     }
 
     /**
@@ -58,6 +71,8 @@ class AutoresController extends Controller
     public function edit($id)
     {
         //
+        $autor = Autor::find($id);
+        return view('backoffice.autores.editar',compact('autor'));
     }
 
     /**
@@ -70,6 +85,15 @@ class AutoresController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $request->validate([
+            'nombre' => 'required|max:150|unique:App\Autor',
+        ]);
+
+        $autor = Autor::find($id);
+
+        $autor->nombre = $request->nombre;
+        $autor->save();
+        return redirect()->route('autores.index')->with('status','Autor '.$request->nombre.' actualizado con exito!');
     }
 
     /**
