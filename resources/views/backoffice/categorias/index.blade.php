@@ -1,12 +1,12 @@
 @extends('backoffice.template')
 
-@section('titulo','Autores')
+@section('titulo','Categoría')
 
-@section('tituloseccion','Autores')
+@section('tituloseccion','Categoría')
 
 @section('ruta')
 	<li class="breadcrumb-item"><a href="#">Inicio</a></li>
-    <li class="breadcrumb-item active">Autores</li>
+    <li class="breadcrumb-item active">Categoría</li>
 @endsection
 
 @section('contenido')
@@ -24,13 +24,13 @@
             <div class="card">
               <div class="card-body">
               	<div class="text-right">
-                    <a class="btn btn-success" href="{{ route('autores.create') }}"><i class="fas fa-plus"></i></a>
+                    <a class="btn btn-success" href="{{ route('categorias.create') }}"><i class="fas fa-plus"></i></a>
 
                     {{-- filtros --}}
-                    <form action="{{ route('autores.index') }}" method="GET" class="form-inline">
+                    <form action="{{ route('categorias.index') }}" method="GET" class="form-inline">
                         <input type="text" name="nombre" id="nombre" class="form-control" placeholder="nombre..." value="{{$request->nombre ?? ''}}">
                         <button type="submit" class="btn btn-info"><i class="fas fa-search"></i></button>
-                        <a class="btn btn-primary" href="{{ route('autores.index') }}"><i class="fas fa-sync"></i></a>
+                        <a class="btn btn-primary" href="{{ route('categorias.index') }}"><i class="fas fa-sync"></i></a>
                     </form>
                     {{-- fin filtros --}}
               	</div>
@@ -42,12 +42,12 @@
                 		<th></th>
                 	</thead>
                 	<tbody>
-                		@foreach($autores as $autor)
+                		@foreach($categorias as $categoria)
 	                		<tr>
-	                			<td>{{$autor->nombre}}</td>
-                                <td><a class="btn btn-warning" href="{{ route('autores.edit',$autor->id) }}" title="Modificar"><i class="fas fa-edit"></i></a></td>
+	                			<td>{{$categoria->nombre}}</td>
+                                <td><a class="btn btn-warning" href="{{ route('categorias.edit',$categoria->id) }}" title="Modificar"><i class="fas fa-edit"></i></a></td>
                                 <td>
-                                    <form action="{{ route('autores.destroy',$autor->id) }}" method="POST">
+                                    <form action="{{ route('categorias.destroy',$categoria->id) }}" method="POST">
                                         @csrf
                                         <input type="hidden" name="_method" value="delete">
                                         <button class="btn btn-danger" type="submit" title="Eliminar"><i class="fas fa-trash"></i></button>

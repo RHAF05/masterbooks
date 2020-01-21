@@ -23,3 +23,6 @@ Route::get('/productos-pdf','backoffice\ProductosController@exportarPdf')->name(
 
 
 Route::resource('/autores', 'backoffice\AutoresController');
+
+
+Route::resource('/categorias', 'backoffice\CategoriasController');

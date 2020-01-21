@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\backoffice;
 
+use App\Categoria;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -12,9 +13,11 @@ class CategoriasController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         //
+        $categorias=Categoria::where('nombre','LIKE','%'.$request->nombre.'%')->get();
+        return view('backoffice.categorias.index',compact('categorias'));
     }
 
     /**
@@ -25,6 +28,7 @@ class CategoriasController extends Controller
     public function create()
     {
         //
+        return view('backoffice.categorias.crear');
     }
 
     /**
@@ -36,6 +40,14 @@ class CategoriasController extends Controller
     public function store(Request $request)
     {
         //
+        $request->validate([
+            'nombre'=>'required|max:100|unique:App\Categoria',
+        ]);
+        $categoria = new Categoria();
+        $categoria->nombre=$request->nombre;
+        $categoria->save();
+
+        return redirect()->route('categorias.index')->with('status','Categoria '.$request->nombre.' guardada con éxito');
     }
 
     /**
@@ -58,6 +70,8 @@ class CategoriasController extends Controller
     public function edit($id)
     {
         //
+        $categoria = Categoria::find($id);
+        return view('backoffice.categorias.editar', compact('categoria'));
     }
 
     /**
@@ -70,6 +84,13 @@ class CategoriasController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $request->validate([
+            'nombre' => 'required|max:100|unique:App\Categoria,nombre'
+        ]);
+        $categoria = Categoria::find($id);
+        $categoria->nombre = $request->nombre;
+        $categoria->save();
+        return redirect()->route('categorias.index')->with('status','Categoria '.$request->nombre.' actualizada con exito!');
     }
 
     /**
@@ -81,5 +102,8 @@ class CategoriasController extends Controller
     public function destroy($id)
     {
         //
+        $categoria = Categoria::find($id);
+        $categoria->delete();
+        return redirect()->route('categorias.index')->with('status','Categoria '.$categoria->nombre.' eliminada!');
     }
 }
