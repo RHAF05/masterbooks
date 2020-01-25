@@ -11,10 +11,12 @@
 |
 */
 
+Route::get('/','frontoffice\PaginasController@inicio')->name('inicio');
+Route::get('detalles/{id}','frontoffice\PaginasController@detalle')->name('producto.detalle');
 
-Route::get('/', function () {
-    return view('backoffice.productos.index');
-});
+// Route::get('/', function () {
+//     return view('backoffice.productos.index');
+// });
 
 Route::resource('/productos','backoffice\ProductosController');
 Route::get('/productos/{id}/inactivar','backoffice\ProductosController@inactivar')->name('productos.inactivar');
