@@ -12,6 +12,8 @@ use App\Tipo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Mail;
+use App\Exports\ProductsExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ProductosController extends Controller
 {
@@ -27,7 +29,8 @@ class ProductosController extends Controller
         $productos = Producto::nombre($request->nombre)
                                 ->categoria($request->categoria_id)
                                 ->precio($request->desde,$request->hasta)
-                                ->get();
+                                // ->get(); //Sin paginacion, trae todos los registros
+                                ->paginate(10); //Paginar en laravel
         // dd($productos);
         return view('backoffice.productos.index',compact('productos','request','categorias'));
     }
@@ -222,5 +225,10 @@ class ProductosController extends Controller
         $pdf->loadView('backoffice.productos.pdf',compact('productos'))->setPaper('a4', 'landscape');
         dd($pdf);
         return $pdf->stream();
+    }
+
+    //Exportar PDF
+    public function exportarExcel(){
+        return Excel::download(new ProductsExport, 'Productos.xlsx');
     }
 }

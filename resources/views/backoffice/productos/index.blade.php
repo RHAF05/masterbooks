@@ -26,10 +26,11 @@
               	<div class="text-right">
                     <a class="btn btn-success" href="{{ route('productos.create') }}"><i class="fas fa-plus"></i></a>
                     <a class="btn btn-danger" href="{{ route('productos.exportarPdf') }}" target="_blank"><i class="fas fa-file-pdf"></i></a>
+                    <a class="btn btn-success" href="{{ route('productos.exportarExcel') }}" target="_blank"><i class="fas fa-file-excel"></i></a>
 
                     {{-- filtros --}}
                     <form action="{{ route('productos.index') }}" method="GET" class="form-inline">
-                        <input type="text" name="nombre" id="nombre" class="form-control" placeholder="nombre..." value="{{$request->nombre}}">
+                        <input type="text" name="nombre" id="nombre" class="form-control" placeholder="nombre..." value="{{$request->nombre ?? ''}}">
                         <select name="categoria_id" id="categoria_id" class="form-control">
                             <option value="">Seleccione categoria...</option>
                             @foreach ($categorias as $categoria)
@@ -87,7 +88,14 @@
 	                	@endforeach
                 	</tbody>
                 </table>
-
+                <div style="float:right">
+                {{ $productos->appends(['nombre'=>$request->nombre,
+                                        'categoria_id'=>$request->categoria_id,
+                                        'desde'=>$request->desde,
+                                        'hasta'=>$request->hasta
+                                        ])
+                                        ->links() }}
+                </div>
               </div>
             </div>
           </div>
