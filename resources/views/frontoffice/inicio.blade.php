@@ -9,7 +9,12 @@
             @foreach ($productos as $producto)
                 <div class="col-md-4">
                     <div class="card" >
-                        <img src="imgproductos/{{$producto->imagen}}" class="card-img-top" alt="{{$producto->nombre}}">
+                        @if($producto->imagen=="")
+                            <img src="imgproductos/caratula.jpg" class="card-img-top" alt="{{$producto->nombre}}">
+                        @else
+                            <img src="imgproductos/{{ $producto->imagen ?? 'caratula.jpg' }}" class="card-img-top" alt="{{$producto->nombre}}">
+                        @endif
+
                         <div class="card-body">
                             <h5 class="card-title">{{$producto->nombre}}</h5>
                             <p class="card-text text-right">${{number_format($producto->precio,2,',','.')}}</p>

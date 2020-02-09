@@ -7,7 +7,12 @@
     <div class="container">
         <div class="row">
             <div class="col-md-6">
-                <img class="img-thumbnail" src="{{asset('imgproductos/'.$producto->imagen)}}" alt="{{$producto->nombre}}" >
+                @if($producto->imagen=="")
+                    <img class="img-thumbnail" src="{{asset('imgproductos/caratula.jpg')}}" alt="{{$producto->nombre}}" >
+                @else
+                    <img class="img-thumbnail" src="{{asset('imgproductos/'.$producto->imagen)}}" alt="{{$producto->nombre}}" >
+                @endif
+
             </div>
             <div class="col-md-6">
                 <div class="card text-center">

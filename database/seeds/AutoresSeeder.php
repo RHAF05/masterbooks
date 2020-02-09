@@ -14,7 +14,15 @@ class AutoresSeeder extends Seeder
     {
         //
         $autor = Autor::create([
-            'nombre' => 'Gabriel Garcia Marquez'
+            'nombre' => 'José Gregorio Arias Noriega'
+        ]);
+
+        $autor = Autor::create([
+            'nombre' => 'Eduard Vega Ordoñez'
+        ]);
+
+        $autor = Autor::create([
+            'nombre' => 'Gabriel García Márquez'
         ]);
     }
 }

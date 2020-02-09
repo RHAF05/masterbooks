@@ -22,5 +22,8 @@ class CategoriasSeeder extends Seeder
         $categoria = Categoria::create([
             'nombre' => 'Novela'
         ]);
+        $categoria = Categoria::create([
+            'nombre' => 'Normas'
+        ]);
     }
 }
