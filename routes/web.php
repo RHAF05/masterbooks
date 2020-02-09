@@ -29,3 +29,7 @@ Route::resource('/autores', 'backoffice\AutoresController');
 
 
 Route::resource('/categorias', 'backoffice\CategoriasController');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
